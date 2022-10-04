@@ -1,0 +1,21 @@
+
+    <div class="table-responsive">
+      <table class="table mb-0" *ngIf="account$ | async as account">
+        <thead>
+          <tr>
+            <th>Operation date</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let operation of account.operations">
+          <tr>
+            <td>{{ operation.operationDate }}</td>
+            <td>{{ operation.type }}</td>
+            <td>{{ operation.amount | currency:"USD":"symbol":"1.2-2"}}</td>
+            <td>{{ operation.balance | currency:"USD":"symbol":"1.2-2" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>

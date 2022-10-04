@@ -1,0 +1,93 @@
+<div class="card-container" id="card-container" *ngIf="account$ | async as account; else back" >
+  <div class="card border-dark mb-3" style="width: 22rem;">
+      <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"><strong>Balance: {{account?.balance}}</strong></h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Account number: {{account?.accountNum}}</li>
+        <li class="list-group-item">First Name: {{account?.client?.firstName}}</li>
+        <li class="list-group-item">Last Name: {{account?.client?.lastName}}</li>
+        <li class="list-group-item">ID: {{account?.client?.id}}</li>
+      </ul>
+      <div class="card-body">
+        <button [routerLink]="['/statement']"  class="btn btn-primary">View Statement</button>
+      </div>
+    </div>
+    <div class="card border-dark mb-3" style="width: 18rem;">
+      <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Deposit</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <button [routerLink]="['/operation', depositOperation]" class="btn btn-secondary">Go to Deposit</button>
+      </div>
+    </div>
+    <div class="card border-dark mb-3" style="width: 18rem;">
+      <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Withdraw</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a [routerLink]="['/operation', withdrawalOperation]" class="btn btn-secondary">Go to Withdrawal</a>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #back>
+    <div class="card">
+      <div class="card-header">
+        Create new account
+      </div>
+      <div class="card-body">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAccountModal">New account</button>
+      </div>
+    </div>
+  </ng-template>
+
+      <!-- addAccount Modal -->
+<div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+          <h5 class="modal-title" id="addAccountModalLabel">Add new account</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+       </div>
+       <div class="modal-body">
+        <form  [formGroup]="newAccountForm" (ngSubmit)="onAddAccountSubmit()" >
+          <div formGroupName="client">
+            <div class="form-group">
+              <label for="name">ID No</label>
+              <input type="text"  name="idNo" class="form-control" formControlName="id"  id="name" placeholder="ID No">
+            </div>
+            <div class="form-group">
+              <label for="name">First Name</label>
+              <input type="text" name="firstName" class="form-control" formControlName="firstName"  id="name" placeholder="First Name">
+            </div>
+            <div class="form-group">
+              <label for="name">Last Name</label>
+              <input type="text"  name="lastName" class="form-control" formControlName="lastName"  id="name" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+              <label for="email">Address</label>
+              <input type="email"  name="adress" class="form-control" formControlName="address"  id="address" placeholder="Address">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" name="phone" class="form-control" formControlName="phone"  id="phone" placeholder="Phone">
+            </div>
+         </div>
+          <div class="form-group">
+             <label for="balance">Initial balance</label>
+             <input type="text" name="balance" class="form-control" formControlName="balance"  id="balance" placeholder="Initial balance">
+          </div>
+          <div class="modal-footer">
+             <button type="button" id="close-model" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button [disabled]="!newAccountForm.valid" type="submit" class="btn btn-primary" >Add Account</button>
+          </div>
+        </form>
+       </div>
+    </div>
+  </div>
+</div>
+
