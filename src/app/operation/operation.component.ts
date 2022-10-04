@@ -16,6 +16,7 @@ export class OperationComponent implements OnInit, OnDestroy {
 
   operationForm!: FormGroup;
   operationType!: OperationType;
+  private clientId!: number;
   private sub: any;
 
   constructor(private formBuilder: FormBuilder,
@@ -30,10 +31,11 @@ export class OperationComponent implements OnInit, OnDestroy {
   this.sub = this.route.params.subscribe(params => {
      let type : keyof typeof OperationType = params['type'];
      this.operationType =  OperationType[type];
+     this.clientId = params['clientId'];
   })
 
     this.operationForm = this.formBuilder.group({
-      clientId: ['', [Validators.required]],
+      clientId: [this.clientId, [Validators.required]],
       amount: ['', [Validators.required]],
 
     })

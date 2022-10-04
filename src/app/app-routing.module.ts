@@ -7,7 +7,7 @@ import { StatementComponent } from './statement/statement.component';
 
 const routes: Routes = [
 {path: 'home', component:HomeComponent},
-{path:'operation/:type', component:OperationComponent},
+{path:'operation/:type/:clientId', component:OperationComponent},
 {path:'statement', component:StatementComponent},
 {path: '', pathMatch:'full', redirectTo: 'home'},
 {path: '**', component: PageNotFoundComponent}];

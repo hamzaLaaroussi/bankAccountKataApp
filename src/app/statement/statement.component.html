@@ -1,6 +1,7 @@
 
     <div class="table-responsive">
       <table class="table mb-0" *ngIf="account$ | async as account">
+        <caption>Account statement</caption>
         <thead>
           <tr>
             <th>Operation date</th>
@@ -13,8 +14,8 @@
           <tr>
             <td>{{ operation.operationDate }}</td>
             <td>{{ operation.type }}</td>
-            <td>{{ operation.amount | currency:"USD":"symbol":"1.2-2"}}</td>
-            <td>{{ operation.balance | currency:"USD":"symbol":"1.2-2" }}</td>
+            <td>{{ operation.amount | currency:"EUR":"symbol":"1.2-2"}}</td>
+            <td>{{ operation.balance | currency:"EUR":"symbol":"1.2-2" }}</td>
           </tr>
         </tbody>
       </table>
